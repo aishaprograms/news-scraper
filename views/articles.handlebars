@@ -1,0 +1,19 @@
+<div class="container">
+<div class="row">
+    <div class="col s12">
+        {{#unless article}}
+            <p>There are no articles. Click 'See More Articles' to add some.</p>
+        {{/unless}}
+        <ul class="collection">
+            {{#each article}}
+            <li class="collection-item">
+                <div>
+                    <a href="{{this.link}}" target="_blank">{{this.title}}</a>
+                    <a href="/{{this._id}}" class="comment-btn black-text right"><i class="material-icons">comment</i> Comments</a>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+</div>

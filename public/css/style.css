@@ -1,0 +1,27 @@
+.body-wrapper {
+    display: flex;
+    min-height: 75vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+    
+
+h1{
+    font-family: 'Pacifico', cursive;
+}
+
+.inline-img{
+    display: inline;
+}
+
+.proper-casing{
+    text-transform: none;
+}
+
+.smaller-h1{
+    font-size: 30%;
+    font-weight: lighter;
+}
