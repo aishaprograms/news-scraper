@@ -8,6 +8,23 @@ var Article = require("../models/Article.js");
 // ROUTES
 module.exports = function (app) {
 
+    // This will get the articles we scraped from the mongoDB
+    app.get("/", function (req, res) {
+        // Grab every doc in the Articles array
+        Article.find({}, function (error, doc) {
+            // Log any errors
+            if (error) {
+                console.log(error);
+            }
+            // Or render the articles hbs template
+            else {
+                res.render("articles", {
+                    article: doc
+                });
+            }
+        });
+    });
+
     // A GET request to scrape the Hacker News website
     app.get("/scrape", function (req, res) {
         // Make a request for the news section of ycombinator
@@ -44,23 +61,7 @@ module.exports = function (app) {
                 }
             });
         });
-    });
-
-    // This will get the articles we scraped from the mongoDB
-    app.get("/", function (req, res) {
-        // Grab every doc in the Articles array
-        Article.find({}, function (error, doc) {
-            // Log any errors
-            if (error) {
-                console.log(error);
-            }
-            // Or render the articles hbs template
-            else {
-                res.render("articles", {
-                    article: doc
-                });
-            }
-        });
+        res.redirect('/');
     });
 
     // Grab an article by it's ObjectId
