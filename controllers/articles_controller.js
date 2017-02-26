@@ -8,7 +8,7 @@ var Article = require("../models/Article.js");
 // ROUTES
 module.exports = function (app) {
 
-    // This will get the articles we scraped from the mongoDB
+    // get the articles scraped from mongoDB
     app.get("/", function (req, res) {
         // Grab every doc in the Articles array
         Article.find({}, function (error, doc) {
@@ -25,13 +25,12 @@ module.exports = function (app) {
         });
     });
 
-    // A GET request to scrape the Hacker News website
+    // A GET request to scrape the HuffPost Travel website
     app.get("/scrape", function (req, res) {
-        // Make a request for the news section of ycombinator
         request("http://huffingtonpost.com/section/travel", function (error, response, html) {
             // Load the html body from request into cheerio
             var $ = cheerio.load(html);
-            // For each element with a "title" class
+            // For each element with a "card_headline" class
             $(".card__headlines").each(function (index, element) {
                 // skip the first card because it is a topics card
                 if (index !== 0) {
@@ -64,15 +63,15 @@ module.exports = function (app) {
         res.redirect('/');
     });
 
-    // Grab an article by it's ObjectId
+    // Grab an article by its ObjectId
     app.get("/:id", function (req, res) {
-        // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+        // findone method using id from the url params 
         Article.findOne({
                 "_id": req.params.id
             })
-            // ..and populate all of the comments associated with it
+            // populate all of the comments associated with the article
             .populate("comment")
-            // now, execute our query
+            //  execute  query
             .exec(function (error, doc) {
                 // Log any errors
                 if (error) {
@@ -86,7 +85,7 @@ module.exports = function (app) {
     });
 
 
-    // Create a new comment or replace a00n existing comment
+    // Create a new comment
     app.post("/:id", function (req, res) {
         // Create a new Comment and pass the req.body to the entry
         Comment.create(req.body, function (error, doc) {
@@ -94,10 +93,8 @@ module.exports = function (app) {
             if (error) {
                 console.log(error);
             }
-            // Otherwise
             else {
-                console.log(doc);
-                // Use the article id to find and update it's Comment
+                // Use the article id to find and add to its Comment array
                 Article.findOneAndUpdate({
                         "_id": req.params.id
                     }, {
@@ -124,6 +121,7 @@ module.exports = function (app) {
         });
     });
 
+    // method to delete comments
     app.delete("/:id/:comment", function (req, res) {
         Comment.findByIdAndRemove(req.params.comment, function (error, doc) {
             // Log any errors
@@ -133,7 +131,7 @@ module.exports = function (app) {
             // Otherwise
             else {
                 console.log(doc);
-                // Use the article id to find and update it's Comment
+                // Use the article id to find and pull from comments array
                 Article.findOneAndUpdate({
                         "_id": req.params.id
                     }, {

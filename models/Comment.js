@@ -5,12 +5,12 @@ var Schema = mongoose.Schema;
 
 // Create the Comment schema
 var CommentSchema = new Schema({
-  // Just a required string
+  // name of commentor is required string
   name: {
     type: String,
     required: true
   },
-  // Just a required string
+  // body is required string
   body: {
     type: String,
     required: true

@@ -1,9 +1,11 @@
 <div class="container">
 <div class="row">
     <div class="col s12">
+        {{!--If no articles have been scraped and saved to db, display this--}}
         {{#unless article}}
             <p>There are no articles. Click 'See More Articles' to add some.</p>
         {{/unless}}
+        {{!--all the articles from db with a link containing each id to add/ view comments--}}
         <ul class="collection">
             {{#each article}}
             <li class="collection-item">

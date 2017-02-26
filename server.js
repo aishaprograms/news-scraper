@@ -24,7 +24,7 @@ app.engine('handlebars', expressHandlebars({
 // Set handlebars engine
 app.set('view engine', 'handlebars');
 
-// Make public a static dir
+// Make public a static directory
 app.use(express.static("public"));
 
 // Database configuration with mongoose

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    //click big red see more articles button scrapes the source
+    //click big red 'see more articles' button scrapes the source
     $('#scrape-btn').on('click', function(event){
         event.preventDefault();
         $.ajax({

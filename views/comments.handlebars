@@ -1,20 +1,24 @@
 <div class="container">
     <div class="row">
         <div class="col s12">
+            {{!--Article title as a link to story--}}
             <h2><a href="{{article.link}}" target="_blank">{{article.title}}</a></h2>
         </div>
         <hr>
         <div class="col s12">
             <h4>Comments</h4>
+            {{!--If no comments associated, display this message--}}
             {{#unless article.comment}}
                 <p>There are no comments for this article. Add a comment below.</p>
             {{/unless}}
         </div>
         <div class="col s12">
+            {{!--Comments associated with article--}}
             <ul class="collection">
                 {{#each article.comment}}
                 <li class="collection-item">
                     <div>
+                        {{!--option to delete any comment--}}
                         <button class="btn-flat delete-btn" data-id="{{this._id}}">X</button> {{this.body}}
                         <em class="secondary-content grey-text">{{this.name}}</em>
                     </div>
@@ -25,6 +29,7 @@
     <div class="row">
         <div class="col s12">
             <h4>Add Your Comment</h4>
+            {{!--form to post new comments--}}
             <form class="col s12" method="POST" action="/{{article._id}}">
                 <div class="row">
                     <div class="input-field col s6">
