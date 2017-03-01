@@ -16,6 +16,9 @@ Visit the Heroku app:
 
 * **Wanderlust Daily** - [Wanderlust Daily](https://lit-journey-52664.herokuapp.com/)
 
+## Updates
+02/28/2017: New articles are added to the top of the list instead of the bottom. The list is sorted by object id in a descending order.
+
 ## Understand
 Whenever a user visits this site, the app will scrape stories from [HuffPost Travel](http://www.huffingtonpost.com/section/travel). The data scraped includes the title and the link. This app uses Cheerio to grab the site content and Mongoose to save it to the MongoDB database. There are no duplicates and the database doesn't get cleared at any point.
 All users can leave comments on the articles. They are also allowed to delete whatever comments associated with an article (that is, until authentication is required on this site). All stored comments are visible to every user.
