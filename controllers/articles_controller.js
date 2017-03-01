@@ -22,7 +22,7 @@ module.exports = function (app) {
                     article: doc
                 });
             }
-        });
+        }).sort({'_id': -1});
     });
 
     // A GET request to scrape the HuffPost Travel website
